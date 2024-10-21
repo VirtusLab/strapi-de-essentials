@@ -4,19 +4,27 @@
   "info": {
     "singularName": "booking",
     "pluralName": "bookings",
-    "displayName": "Booking"
+    "displayName": "Booking",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
+    "ref_number": {
+      "type": "string",
+      "unique": true,
+      "required": true,
+      "configurable": false
+    },
     "from": {
       "type": "datetime",
       "required": true
     },
     "to": {
-      "type": "datetime"
+      "type": "datetime",
+      "required": true
     },
     "car": {
       "type": "relation",
@@ -55,6 +63,15 @@
       "max": 100,
       "min": 0,
       "default": 100
+    },
+    "price_total": {
+      "type": "decimal"
+    },
+    "discount_applied": {
+      "type": "integer",
+      "min": 0,
+      "max": 100,
+      "default": 0
     }
   }
 }

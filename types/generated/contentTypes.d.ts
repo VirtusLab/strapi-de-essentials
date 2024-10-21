@@ -6,13 +6,17 @@ export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
     singularName: 'booking';
     pluralName: 'bookings';
     displayName: 'Booking';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
+    ref_number: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     from: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    to: Schema.Attribute.DateTime;
+    to: Schema.Attribute.DateTime & Schema.Attribute.Required;
     car: Schema.Attribute.Relation<'manyToOne', 'api::car.car'>;
     customer: Schema.Attribute.Relation<
       'manyToOne',
@@ -43,6 +47,16 @@ export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
         number
       > &
       Schema.Attribute.DefaultTo<100>;
+    price_total: Schema.Attribute.Decimal;
+    discount_applied: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 100;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
