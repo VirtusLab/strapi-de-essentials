@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bookings",
+  "info": {
+    "singularName": "booking",
+    "pluralName": "bookings",
+    "displayName": "Booking"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "from": {
+      "type": "datetime",
+      "required": true
+    },
+    "to": {
+      "type": "datetime"
+    },
+    "car": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::car.car",
+      "inversedBy": "bookings"
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "bookings"
+    },
+    "state": {
+      "type": "enumeration",
+      "enum": [
+        "New",
+        "Approved",
+        "Paid",
+        "Done",
+        "Rejected"
+      ],
+      "required": true,
+      "default": "New"
+    },
+    "fuel_initial_state": {
+      "type": "integer",
+      "default": 100,
+      "required": true,
+      "min": 0,
+      "max": 100
+    },
+    "fuel_returned_state": {
+      "type": "integer",
+      "required": true,
+      "max": 100,
+      "min": 0,
+      "default": 100
+    }
+  }
+}
